@@ -14,3 +14,5 @@ FROM joseluisq/static-web-server:2.44 AS runtime
 COPY --from=build /app/dist /public
 ENV SERVER_ROOT=/public
 EXPOSE 80
+LABEL org.opencontainers.image.source="https://github.com/CicerBro/texttools" \
+      org.opencontainers.image.description="Texttools static web app served by Static Web Server"

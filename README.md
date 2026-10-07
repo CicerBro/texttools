@@ -4,9 +4,18 @@ A small browser-based text utility app, served as a static site.
 
 ## Run with Docker
 
+Build locally:
+
 ```sh
 docker build -t texttools .
 docker run --rm -p 8080:80 texttools
+```
+
+Run the published image:
+
+```sh
+docker login ghcr.io
+docker run --rm -p 8080:80 ghcr.io/cicerbro/texttools:latest
 ```
 
 Open <http://localhost:8080>.
