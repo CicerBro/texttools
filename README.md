@@ -22,11 +22,8 @@ docker run --rm -p 8080:80 texttools
 Run the published image:
 
 ```sh
-docker login ghcr.io
 docker run --rm -p 8080:80 ghcr.io/cicerbro/texttools:latest
 ```
-
-The GHCR package is private, so this requires access to the package. You can build and run the image locally with the commands above without GHCR access.
 
 Open <http://localhost:8080>.
 
