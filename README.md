@@ -31,3 +31,7 @@ The GHCR package is private, so this requires access to the package. You can bui
 Open <http://localhost:8080>.
 
 The runtime image is based on [`joseluisq/static-web-server:2.44`](https://hub.docker.com/r/joseluisq/static-web-server), the scratch variant. The Node build stage is discarded from the final image.
+
+## Font
+
+The app bundles Geist Sans from [`@fontsource-variable/geist`](https://github.com/fontsource/font-files). The font is licensed under SIL Open Font License 1.1; see [`public/fonts/OFL.txt`](public/fonts/OFL.txt).
