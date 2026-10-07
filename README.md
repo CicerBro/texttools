@@ -2,6 +2,8 @@
 
 A small browser-based text utility app, served as a static site.
 
+![Texttools app showing the Prefix & suffix tool](docs/images/texttools.png)
+
 ## Tools
 
 - **Prefix & suffix:** add or remove text at the start or end of every line, with an option to skip empty lines.
