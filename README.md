@@ -7,6 +7,7 @@ A small browser-based text utility app, served as a static site.
 - **Prefix & suffix:** add or remove text at the start or end of every line, with an option to skip empty lines.
 - **Line breaks:** join lines with a chosen separator, insert breaks before or after matching text, or wrap lines to a chosen width. Wrapping can preserve words or break at an exact character count.
 - **Duplicate lines:** keep the first copy of each line, with options for case matching, removing empty lines, and viewing removed lines.
+- **Empty lines:** remove empty lines while preserving all non-empty lines.
 
 Each tool has an input and output editor. You can paste text, load or drop a `.txt`, `.csv`, `.md`, `.log`, or `.tsv` file, view line and character counts, copy or download the output, choose LF or CRLF line endings for downloads, and send output back to the input.
 

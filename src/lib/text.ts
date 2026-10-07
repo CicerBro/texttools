@@ -77,6 +77,19 @@ export function removeLineBreaks(
   return { text: normalized.replaceAll("\n", replacement), replaced };
 }
 
+export function removeEmptyLines(text: string): { text: string; removed: number } {
+  if (text === "") return { text: "", removed: 0 };
+
+  const normalized = normalizeNewlines(text);
+  const hasFinalNewline = normalized.endsWith("\n");
+  const lines = hasFinalNewline ? normalized.slice(0, -1).split("\n") : normalized.split("\n");
+  const kept = lines.filter((line) => line !== "");
+  return {
+    text: kept.join("\n") + (hasFinalNewline && kept.length > 0 ? "\n" : ""),
+    removed: lines.length - kept.length,
+  };
+}
+
 export function breakOnText(
   text: string,
   needle: string,

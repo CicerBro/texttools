@@ -1,9 +1,10 @@
 import { breaksTool } from "./tools/breaks";
 import { duplicatesTool } from "./tools/duplicates";
+import { emptyLinesTool } from "./tools/empty-lines";
 import { prefixTool } from "./tools/prefix";
 import type { Tool } from "./tools/types";
 
-const tools: Tool[] = [prefixTool, breaksTool, duplicatesTool];
+const tools: Tool[] = [prefixTool, breaksTool, duplicatesTool, emptyLinesTool];
 
 export function mountApp(root: HTMLElement): void {
   root.innerHTML = `
