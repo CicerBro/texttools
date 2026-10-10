@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   addPrefixSuffix,
+  decodeBase64,
+  encodeBase64,
   removePrefixSuffix,
   breakOnText,
   formatRemovedLine,
@@ -88,5 +90,35 @@ describe("duplicate lines", () => {
     const result = removeDuplicateLines("  \n  \nx", true, true);
     assert.equal(result.text, "  \nx");
     assert.equal(result.removed[0]?.reason, "duplicate");
+  });
+});
+
+describe("base64", () => {
+  it("encodes UTF-8 text and round-trips it", () => {
+    assert.equal(encodeBase64("Hello"), "SGVsbG8=");
+    assert.equal(encodeBase64("café"), "Y2Fmw6k=");
+    assert.equal(decodeBase64(encodeBase64("café 👍")).text, "café 👍");
+    assert.equal(decodeBase64(encodeBase64("a\r\nb")).text, "a\r\nb");
+  });
+
+  it("uses the URL-safe alphabet without padding", () => {
+    assert.equal(encodeBase64(">>>", true), "Pj4-");
+    assert.equal(encodeBase64("???", true), "Pz8_");
+    assert.equal(encodeBase64("Hi", true), "SGk");
+    assert.equal(decodeBase64("Pj4-").text, ">>>");
+    assert.equal(decodeBase64("Pz8_").text, "???");
+  });
+
+  it("decodes wrapped Base64 and missing padding", () => {
+    assert.equal(decodeBase64("SGVs\nbG8=").text, "Hello");
+    assert.equal(decodeBase64("SGVsbG8").text, "Hello");
+    assert.equal(decodeBase64("  ").text, "");
+  });
+
+  it("rejects invalid Base64 and non-text bytes", () => {
+    assert.equal(decodeBase64("Hello!").error, "That is not valid Base64.");
+    assert.equal(decodeBase64("Hello!").text, "");
+    assert.equal(decodeBase64("A").error, "That is not valid Base64.");
+    assert.equal(decodeBase64("/w==").error, "That Base64 does not decode to text.");
   });
 });

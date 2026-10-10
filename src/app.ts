@@ -1,10 +1,11 @@
+import { base64Tool } from "./tools/base64";
 import { breaksTool } from "./tools/breaks";
 import { duplicatesTool } from "./tools/duplicates";
 import { emptyLinesTool } from "./tools/empty-lines";
 import { prefixTool } from "./tools/prefix";
 import type { Tool } from "./tools/types";
 
-const tools: Tool[] = [prefixTool, breaksTool, duplicatesTool, emptyLinesTool];
+const tools: Tool[] = [prefixTool, breaksTool, duplicatesTool, emptyLinesTool, base64Tool];
 
 export function mountApp(root: HTMLElement): void {
   root.innerHTML = `

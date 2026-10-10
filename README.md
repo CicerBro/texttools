@@ -10,6 +10,7 @@ A small browser-based text utility app, served as a static site.
 - **Line breaks:** join lines with a chosen separator, insert breaks before or after matching text, or wrap lines to a chosen width. Wrapping can preserve words or break at an exact character count.
 - **Duplicate lines:** keep the first copy of each line, with options for case matching, removing empty lines, and viewing removed lines.
 - **Empty lines:** remove empty lines while preserving all non-empty lines.
+- **Base64:** encode text as Base64, or decode Base64 back to text. Encoding can use the URL-safe alphabet. Decoding accepts standard and URL-safe Base64, ignores whitespace, and fills in missing padding.
 
 Each tool has an input and output editor. You can paste text, load or drop a `.txt`, `.csv`, `.md`, `.log`, or `.tsv` file, view line and character counts, copy or download the output, choose LF or CRLF line endings for downloads, and send output back to the input.
 

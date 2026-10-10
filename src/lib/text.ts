@@ -258,3 +258,41 @@ export function formatRemovedLine(item: RemovedLine): string {
   if (item.reason === "empty") return `Line ${item.line} — empty`;
   return `Line ${item.line} — duplicate of line ${item.duplicateOf}: ${item.text}`;
 }
+
+export function encodeBase64(text: string, urlSafe = false): string {
+  if (text === "") return "";
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  const size = 0x8000;
+  for (let index = 0; index < bytes.length; index += size) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + size));
+  }
+  const encoded = btoa(binary);
+  if (!urlSafe) return encoded;
+  return encoded.replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/g, "");
+}
+
+export function decodeBase64(text: string): { text: string; error: string | null } {
+  const compact = text.replace(/\s/g, "");
+  if (compact === "") return { text: "", error: null };
+
+  const normalized = compact.replaceAll("-", "+").replaceAll("_", "/");
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(normalized) || normalized.length % 4 === 1) {
+    return { text: "", error: "That is not valid Base64." };
+  }
+
+  const pad = (4 - (normalized.length % 4)) % 4;
+  let binary: string;
+  try {
+    binary = atob(normalized + "=".repeat(pad));
+  } catch {
+    return { text: "", error: "That is not valid Base64." };
+  }
+
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  try {
+    return { text: new TextDecoder("utf-8", { fatal: true }).decode(bytes), error: null };
+  } catch {
+    return { text: "", error: "That Base64 does not decode to text." };
+  }
+}
